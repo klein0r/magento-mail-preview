@@ -106,9 +106,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
         foreach ($this->getCurrentReplacements() as $var => $rep)
         {
-            if ($rep['replaced']) {
-                $vars[$var] = $rep['replacement'];
-            }
+            $vars[$var] = 'test';
         }
 
         return $vars;

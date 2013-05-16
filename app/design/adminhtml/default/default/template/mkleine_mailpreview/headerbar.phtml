@@ -1,3 +1,11 @@
 <div class="header">
 
+    <ul>
+    <?php foreach($this->getReplacements() as $var => $value) : ?>
+
+        <li><?php echo sprintf("[%s] => %s", $var, $value); ?></li>
+
+    <?php endforeach; ?>
+    </ul>
+
 </div>

@@ -18,19 +18,20 @@
  * @copyright   Copyright (c) 2013 Matthias Kleine (http://mkleine.de)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class MKleine_Mailpreview_Block_Adminhtml_Headerbar extends Mage_Adminhtml_Block_Abstract
-{
 
-    public function getReplacements()
-    {
-        return $this->getRenderer()->getTemplateVars();
-    }
+$installer = $this;
 
-    /**
-     * @return MKleine_Mailpreview_Model_Renderer
-     */
-    public function getRenderer()
-    {
-        return Mage::getSingleton('mk_mailpreview/renderer');
-    }
-}
+$installer->startSetup();
+
+$installer->run("
+
+    CREATE TABLE IF NOT EXISTS {$this->getTable('mailprev_placeholder')} (
+      `placeholder_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+      `variable` varchar(255) NOT NULL DEFAULT '',
+      `replacement` varchar(255) NOT NULL DEFAULT ''
+      PRIMARY KEY (`placeholder_id`)
+    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+");
+
+$installer->endSetup();

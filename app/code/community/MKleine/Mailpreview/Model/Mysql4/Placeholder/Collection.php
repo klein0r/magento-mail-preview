@@ -18,19 +18,11 @@
  * @copyright   Copyright (c) 2013 Matthias Kleine (http://mkleine.de)
  * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class MKleine_Mailpreview_Block_Adminhtml_Headerbar extends Mage_Adminhtml_Block_Abstract
+class MKleine_Mailpreview_Model_Mysql4_Placeholder_Collection extends Mage_Core_Model_Mysql4_Collection_Abstract
 {
-
-    public function getReplacements()
+    public function _construct()
     {
-        return $this->getRenderer()->getTemplateVars();
-    }
-
-    /**
-     * @return MKleine_Mailpreview_Model_Renderer
-     */
-    public function getRenderer()
-    {
-        return Mage::getSingleton('mk_mailpreview/renderer');
+        parent::_construct();
+        $this->_init('mk_mailpreview/placeholder');
     }
 }

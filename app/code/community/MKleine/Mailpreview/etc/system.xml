@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <mailpreview translate="label" module="mk_mailpreview">
+            <tab>general</tab>
+            <label>Mail Preview</label>
+            <sort_order>80</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>0</show_in_website>
+            <show_in_store>0</show_in_store>
+            <groups>
+                <admin_settings translate="label" module="mk_mailpreview">
+                    <label>Admin Settings</label>
+                    <sort_order>10</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <fields>
+                        <show_header_in_prev translate="label,comment" module="mk_mailpreview">
+                            <label>Show header in preview</label>
+                            <comment>Will display a header in the mail preview with placeholder information</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </show_header_in_prev>
+                        <auto_add_placeholders translate="label,comment" module="mk_mailpreview">
+                            <label>Auto add placeholders</label>
+                            <comment>Will save the found placeholders in the placeholder table</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </auto_add_placeholders>
+                    </fields>
+                </admin_settings>
+            </groups>
+        </mailpreview>
+    </sections>
+</config>

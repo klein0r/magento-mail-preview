@@ -14,7 +14,16 @@
         <models>
             <mk_mailpreview>
                 <class>MKleine_Mailpreview_Model</class>
+                <resourceModel>mk_mailpreview_mysql4</resourceModel>
             </mk_mailpreview>
+            <mk_mailpreview_mysql4>
+                <class>MKleine_Mailpreview_Model_Mysql4</class>
+                <entities>
+                    <placeholder>
+                        <table>mailprev_placeholder</table>
+                    </placeholder>
+                </entities>
+            </mk_mailpreview_mysql4>
             <core>
                 <rewrite>
                     <email_template_filter>MKleine_Mailpreview_Model_Email_Template_Filter</email_template_filter>
@@ -26,6 +35,26 @@
                 <class>MKleine_Mailpreview_Helper</class>
             </mk_mailpreview>
         </helpers>
+        <resources>
+            <mailpreview_setup>
+                <setup>
+                    <module>MKleine_Mailpreview</module>
+                </setup>
+                <connection>
+                    <use>core_setup</use>
+                </connection>
+            </mailpreview_setup>
+            <mailpreview_write>
+                <connection>
+                    <use>core_write</use>
+                </connection>
+            </mailpreview_write>
+            <mailpreview_read>
+                <connection>
+                    <use>core_read</use>
+                </connection>
+            </mailpreview_read>
+        </resources>
     </global>
     <admin>
         <routers>
@@ -56,4 +85,12 @@
             </modules>
         </translate>
     </adminhtml>
+    <default>
+        <mailpreview>
+            <admin_settings>
+                <show_header_in_prev>1</show_header_in_prev>
+                <auto_add_placeholders>0</auto_add_placeholders>
+            </admin_settings>
+        </mailpreview>
+    </default>
 </config>
