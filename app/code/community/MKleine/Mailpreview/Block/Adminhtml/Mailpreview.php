@@ -1,5 +1,23 @@
 <?php
-
+/**
+ * MKleine - (c) Matthias Kleine
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ *
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@mkleine.de so we can send you a copy immediately.
+ *
+ * @category    MKleine
+ * @package     MKleine_Mailpreview
+ * @copyright   Copyright (c) 2013 Matthias Kleine (http://mkleine.de)
+ * @license     http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ */
 class MKleine_Mailpreview_Block_Adminhtml_Mailpreview extends Mage_Adminhtml_Block_Widget
 {
     /**
@@ -9,34 +27,14 @@ class MKleine_Mailpreview_Block_Adminhtml_Mailpreview extends Mage_Adminhtml_Blo
      */
     protected function _toHtml()
     {
-        /** @var $template Mage_Core_Model_Email_Template */
-        $template = Mage::getModel('core/email_template');
-        $id = (int)$this->getRequest()->getParam('id');
-        if ($id) {
-            $template->load($id);
-        } else {
-            $template->setTemplateType($this->getRequest()->getParam('type'));
-            $template->setTemplateText($this->getRequest()->getParam('text'));
-            $template->setTemplateStyles($this->getRequest()->getParam('styles'));
-        }
+        /** @var $renderer MKleine_Mailpreview_Model_Renderer */
+        $renderer = Mage::getSingleton('mk_mailpreview/renderer');
 
-        /* @var $filter Mage_Core_Model_Input_Filter_MaliciousCode */
-        $filter = Mage::getSingleton('core/input_filter_maliciousCode');
+        $templateProcessed = $renderer->getProcessedTemplate();
 
-        $template->setTemplateText(
-            $filter->filter($template->getTemplateText())
-        );
-
-        Varien_Profiler::start("email_template_proccessing");
-        $vars = array();
-
-        $templateProcessed = $template->getProcessedTemplate($vars, true);
-
-        if ($template->isPlain()) {
+        if ($renderer->getTemplate()->isPlain()) {
             $templateProcessed = "<pre>" . htmlspecialchars($templateProcessed) . "</pre>";
         }
-
-        Varien_Profiler::stop("email_template_proccessing");
 
         return $templateProcessed;
     }
