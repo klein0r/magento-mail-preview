@@ -7,7 +7,7 @@
                     <children>
                         <mailpreview translate="title" module="mk_mailpreview">
                             <title>Mail preview placeholders</title>
-                            <action>adminhtml/system_currency</action>
+                            <action>mailpreview/adminhtml_placeholder</action>
                             <sort_order>50</sort_order>
                         </mailpreview>
                     </children>
