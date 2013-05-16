@@ -15,6 +15,11 @@
             <mk_mailpreview>
                 <class>MKleine_Mailpreview_Model</class>
             </mk_mailpreview>
+            <core>
+                <rewrite>
+                    <email_template_filter>MKleine_Mailpreview_Model_Email_Template_Filter</email_template_filter>
+                </rewrite>
+            </core>
         </models>
         <helpers>
             <mk_mailpreview>

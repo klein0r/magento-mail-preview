@@ -102,6 +102,26 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
     public function getTemplateVars()
     {
-        return array();
+        $vars = array();
+
+        foreach ($this->getCurrentReplacements() as $var => $rep)
+        {
+            if ($rep['replaced']) {
+                $vars[$var] = $rep['replacement'];
+            }
+        }
+
+        return $vars;
     }
+
+    public function getCurrentReplacements()
+    {
+        $template = $this->getTemplate();
+
+        /** @var $filter MKleine_Mailpreview_Model_Email_Template_Filter */
+        $filter = $template->getTemplateFilter();
+
+        return $filter->getCurrentReplacements($template->getPreparedTemplateText());
+    }
+
 }
