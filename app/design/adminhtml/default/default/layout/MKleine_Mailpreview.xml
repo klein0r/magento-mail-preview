@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<layout version="0.1.0">
+
+    <mkleine_mailpreview>
+        <block type="core/template" name="root" output="toHtml" template="mkleine_mailpreview/preview.phtml">
+            <block type="adminhtml/system_email_template_preview" name="content" as="content"></block>
+        </block>
+    </mkleine_mailpreview>
+
+</layout>

@@ -2,3 +2,5 @@ app/code/community/MKleine/Mailpreview app/code/community/MKleine/Mailpreview
 app/etc/modules/MKleine_Mailpreview.xml app/etc/modules/MKleine_Mailpreview.xml
 app/locale/de_DE/MKleine_Mailpreview.csv app/locale/de_DE/MKleine_Mailpreview.csv
 app/locale/en_US/MKleine_Mailpreview.csv app/locale/en_US/MKleine_Mailpreview.csv
+app/design/adminhtml/default/default/layout/MKleine_Mailpreview.xml app/design/adminhtml/default/default/layout/MKleine_Mailpreview.xml
+app/design/adminhtml/default/default/template/mkleine_mailpreview app/design/adminhtml/default/default/template/mkleine_mailpreview

@@ -22,6 +22,17 @@
             </mk_mailpreview>
         </helpers>
     </global>
+    <admin>
+        <routers>
+            <adminhtml>
+                <args>
+                    <modules>
+                        <MKleine_Mailpreview before="Mage_Adminhtml">MKleine_Mailpreview</MKleine_Mailpreview>
+                    </modules>
+                </args>
+            </adminhtml>
+        </routers>
+    </admin>
     <adminhtml>
         <layout>
             <updates>
