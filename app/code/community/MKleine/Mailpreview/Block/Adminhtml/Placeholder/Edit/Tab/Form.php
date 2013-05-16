@@ -60,19 +60,25 @@ class MKleine_Mailpreview_Block_Adminhtml_Placeholder_Edit_Tab_Form
         $this->setForm($form);
         $fieldset = $form->addFieldset('plceholder_form', array('legend' => Mage::helper('mk_mailpreview')->__('Allgemein')));
 
-        $fieldset->addField('title', 'text', array(
-            'label' => $this->__('Title'),
+        $fieldset->addField('variable', 'text', array(
+            'label' => $this->__('Variable'),
             'required' => false,
-            'name' => 'title',
+            'name' => 'variable',
+        ));
+
+        $fieldset->addField('replacement', 'text', array(
+            'label' => $this->__('Replacement'),
+            'required' => false,
+            'name' => 'replacement',
         ));
 
         if (Mage::getSingleton('adminhtml/session')->getPlaceholderData()) {
-
             $form->setValues(Mage::getSingleton('adminhtml/session')->getPlaceholderData());
             Mage::getSingleton('adminhtml/session')->setPlaceholderData(null);
         } elseif (Mage::registry('placeholder_data')) {
             $form->setValues(Mage::registry('placeholder_data')->getData());
         }
+
         return parent::_prepareForm();
     }
 }
