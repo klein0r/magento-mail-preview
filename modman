@@ -1,0 +1,4 @@
+app/code/community/MKleine/Mailpreview app/code/community/MKleine/Mailpreview
+app/etc/modules/MKleine_Mailpreview.xml app/etc/modules/MKleine_Mailpreview.xml
+app/locale/de_DE/MKleine_Mailpreview.csv app/locale/de_DE/MKleine_Mailpreview.csv
+app/locale/en_US/MKleine_Mailpreview.csv app/locale/en_US/MKleine_Mailpreview.csv
