@@ -5,3 +5,5 @@
 "Will display a header in the mail preview with placeholder information","Zeigt eine Kopfzeile in der Mailvorschau mit Platzhalterinformationen"
 "Auto add placeholders","Platzhalter automatisch speichern"
 "Will save the found placeholders in the placeholder table","Speichert die gefundenen Platzhalter automatisch in der Datenbank"
+"Item does not exist","Der Platzhalter existiert nicht"
+"Item was successfully deleted","Platzhalter gelöscht"

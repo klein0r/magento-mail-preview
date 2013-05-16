@@ -5,3 +5,5 @@
 "Will display a header in the mail preview with placeholder information","Will display a header in the mail preview with placeholder information"
 "Auto add placeholders","Auto add placeholders"
 "Will save the found placeholders in the placeholder table","Will save the found placeholders in the placeholder table"
+"Item does not exist","Placeholder does not exist"
+"Item was successfully deleted",Placeholder deleted"

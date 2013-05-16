@@ -65,6 +65,13 @@
                     </modules>
                 </args>
             </adminhtml>
+            <mk_mailpreview>
+                <use>admin</use>
+                <args>
+                    <module>MKleine_Mailpreview</module>
+                    <frontName>mailpreview</frontName>
+                </args>
+            </mk_mailpreview>
         </routers>
     </admin>
     <adminhtml>
