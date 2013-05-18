@@ -16,12 +16,22 @@
                     <show_in_website>0</show_in_website>
                     <show_in_store>0</show_in_store>
                     <fields>
+                        <preview_store translate="label,comment" module="mk_mailpreview">
+                            <label>Preview Store</label>
+                            <comment>Defines the store which will be used in preview mode</comment>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_store</source_model>
+                            <sort_order>10</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </preview_store>
                         <show_header_in_prev translate="label,comment" module="mk_mailpreview">
                             <label>Show header in preview</label>
                             <comment>Will display a header in the mail preview with placeholder information</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>10</sort_order>
+                            <sort_order>20</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>
@@ -31,7 +41,7 @@
                             <comment>Will save the found placeholders in the placeholder table</comment>
                             <frontend_type>select</frontend_type>
                             <source_model>adminhtml/system_config_source_yesno</source_model>
-                            <sort_order>20</sort_order>
+                            <sort_order>30</sort_order>
                             <show_in_default>1</show_in_default>
                             <show_in_website>0</show_in_website>
                             <show_in_store>0</show_in_store>

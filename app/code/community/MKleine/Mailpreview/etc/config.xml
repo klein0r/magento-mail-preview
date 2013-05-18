@@ -108,6 +108,7 @@
             <admin_settings>
                 <show_header_in_prev>1</show_header_in_prev>
                 <auto_add_placeholders>0</auto_add_placeholders>
+                <preview_store>0</preview_store>
             </admin_settings>
         </mailpreview>
     </default>

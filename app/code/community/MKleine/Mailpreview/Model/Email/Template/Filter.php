@@ -20,6 +20,25 @@
  */
 class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Email_Template_Filter
 {
+    /**
+     * Overrides the default Store function
+     * @return int|mixed
+     */
+    public function getStoreId()
+    {
+        // Use mail preview configuration in admin mode
+        if (Mage::app()->getStore()->isAdmin()) {
+            return Mage::getStoreConfig('mailpreview/admin_settings/preview_store');
+        }
+
+        return parent::getStoreId();
+    }
+
+    /**
+     * Returns a list of variables in the delivered text
+     * @param $text
+     * @return array
+     */
     public function getCurrentReplacements($text)
     {
         $vars = array();

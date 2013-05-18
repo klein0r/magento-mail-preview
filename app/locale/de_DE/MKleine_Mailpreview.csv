@@ -13,3 +13,5 @@
 "Element","Platzhalter"
 "Variable","Variable"
 "Replacement","Ersetzen durch"
+"Preview Store","Vorschau Store"
+"Defines the store which will be used in preview mode","Definiert, welcher Store im Vorschau-Modus genutzt wird"

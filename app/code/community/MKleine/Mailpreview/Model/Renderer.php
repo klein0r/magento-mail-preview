@@ -27,6 +27,12 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
     protected $_templateModel = null;
 
     /**
+     * Never replaced variables
+     * @var array
+     */
+    protected $_blackListVars = array('logo_url', 'logo_alt', 'subscriber');
+
+    /**
      * @param $templateId Specific template id
      */
     protected function initWithId($templateId)
@@ -106,8 +112,15 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
         foreach ($this->getCurrentReplacements() as $var => $rep)
         {
-            $vars[$var] = 'test';
+            if (!in_array($var, $this->_blackListVars)) {
+                $vars[$var] = 'test';
+            }
         }
+
+        $user = new stdClass();
+        $user->name = 'adsf';
+
+        $vars['user'] = 'afff adfs asd';
 
         return $vars;
     }
