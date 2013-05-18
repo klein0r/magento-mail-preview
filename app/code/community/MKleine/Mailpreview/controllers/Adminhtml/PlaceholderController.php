@@ -44,7 +44,7 @@ class MKleine_Mailpreview_Adminhtml_PlaceholderController extends Mage_Adminhtml
                 $model->setData($data);
             }
 
-            Mage::register('carousel_data', $model);
+            Mage::register('placeholder_data', $model);
 
             $this->loadLayout();
             $this->_setActiveMenu('mk_mailpreview/items');
@@ -54,8 +54,8 @@ class MKleine_Mailpreview_Adminhtml_PlaceholderController extends Mage_Adminhtml
 
             $this->getLayout()->getBlock('head')->setCanLoadExtJs(true);
 
-            $this->_addContent($this->getLayout()->createBlock('mk_mailpreview/adminhtml_carousel_edit'))
-                ->_addLeft($this->getLayout()->createBlock('mk_mailpreview/adminhtml_carousel_edit_tabs'));
+            $this->_addContent($this->getLayout()->createBlock('mk_mailpreview/adminhtml_placeholder_edit'))
+                ->_addLeft($this->getLayout()->createBlock('mk_mailpreview/adminhtml_placeholder_edit_tabs'));
 
             $this->renderLayout();
 
@@ -131,8 +131,8 @@ class MKleine_Mailpreview_Adminhtml_PlaceholderController extends Mage_Adminhtml
         } else {
             try {
                 foreach ($placeholderIds as $placeholderId) {
-                    $carousel = Mage::getModel('mk_mailpreview/placeholder')->load($placeholderId);
-                    $carousel->delete();
+                    $placeholder = Mage::getModel('mk_mailpreview/placeholder')->load($placeholderId);
+                    $placeholder->delete();
                 }
 
                 Mage::getSingleton('adminhtml/session')->addSuccess(

@@ -25,7 +25,7 @@ class MKleine_Mailpreview_Block_Adminhtml_Placeholder extends Mage_Adminhtml_Blo
         $helper = Mage::helper('mk_mailpreview');
 
         $this->_controller = 'adminhtml_placeholder';
-        $this->_blockGroup = 'placeholder';
+        $this->_blockGroup = 'mk_mailpreview';
         $this->_headerText = $helper->__('Placeholder');
         $this->_addButtonLabel = $helper->__('Add');
 

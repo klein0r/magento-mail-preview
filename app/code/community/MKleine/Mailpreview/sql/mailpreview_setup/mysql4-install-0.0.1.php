@@ -28,9 +28,9 @@ $installer->run("
     CREATE TABLE IF NOT EXISTS {$this->getTable('mailprev_placeholder')} (
       `placeholder_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
       `variable` varchar(255) NOT NULL DEFAULT '',
-      `replacement` varchar(255) NOT NULL DEFAULT ''
+      `replacement` varchar(255) NOT NULL DEFAULT '',
       PRIMARY KEY (`placeholder_id`)
-    ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 ");
 

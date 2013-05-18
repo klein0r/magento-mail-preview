@@ -25,7 +25,7 @@ class MKleine_Mailpreview_Block_Adminhtml_Placeholder_Edit extends Mage_Adminhtm
         parent::__construct();
 
         $this->_objectId = 'id';
-        $this->_blockGroup = 'placeholder';
+        $this->_blockGroup = 'mk_mailpreview';
         $this->_controller = 'adminhtml_placeholder';
 
         $this->_updateButton('save', 'label', $this->__('Save Item'));

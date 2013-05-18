@@ -1,3 +1,4 @@
+"Placeholder","Platzhalter"
 "Mail preview placeholders","Mail-Vorschau Platzhalter"
 "Mail Preview","Mail-Vorschau"
 "Admin Settings","Admin Einstellungen"
@@ -7,3 +8,8 @@
 "Will save the found placeholders in the placeholder table","Speichert die gefundenen Platzhalter automatisch in der Datenbank"
 "Item does not exist","Der Platzhalter existiert nicht"
 "Item was successfully deleted","Platzhalter gelöscht"
+"Add","Platzhalter hinzufügen"
+"Add Item","Platzhalter hinzufügen"
+"Element","Platzhalter"
+"Variable","Variable"
+"Replacement","Ersetzen durch"
