@@ -82,6 +82,17 @@
                 </mk_mailpreview>
             </updates>
         </layout>
+        <events>
+            <mk_mailpreview_found_mail_preview_vars>
+                <observers>
+                    <mk_mailpreview_found_mail_preview_vars_ob>
+                        <type>singleton</type>
+                        <class>mk_mailpreview/observer</class>
+                        <method>found_mail_preview_vars</method>
+                    </mk_mailpreview_found_mail_preview_vars_ob>
+                </observers>
+            </mk_mailpreview_found_mail_preview_vars>
+        </events>
         <translate>
             <modules>
                 <MKleine_Mailpreview>

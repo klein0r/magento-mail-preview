@@ -66,11 +66,11 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
             }
         }
 
-        $vars['logo_url'] = array(
-            'type' => 'var',
-            'replacement' => 'test',
-            'replaced' => ($replacedValue != $match)
-        );
+        // dispatch event with found vars
+        Mage::dispatchEvent('mk_mailpreview_found_mail_preview_vars', array(
+            'sender' => $this,
+            'vars'  => $vars
+        ));
 
         return $vars;
     }

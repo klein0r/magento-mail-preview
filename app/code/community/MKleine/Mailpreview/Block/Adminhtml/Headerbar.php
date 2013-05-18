@@ -20,7 +20,7 @@
  */
 class MKleine_Mailpreview_Block_Adminhtml_Headerbar extends Mage_Adminhtml_Block_Abstract
 {
-    const XML_CONFIG_SHOW_HEADER_IN_PREVIEW_PATH = 'mailpreview/admin_settings/show_header_in_prev';
+    const CONFIG_SHOW_HEADER_IN_PREVIEW_PATH = 'mailpreview/admin_settings/show_header_in_prev';
 
     /**
      * Describes if the header will be shown in mail preview
@@ -28,7 +28,7 @@ class MKleine_Mailpreview_Block_Adminhtml_Headerbar extends Mage_Adminhtml_Block
      */
     public function showHeader()
     {
-        return Mage::getStoreConfig(self::XML_CONFIG_SHOW_HEADER_IN_PREVIEW_PATH);
+        return Mage::getStoreConfig(self::CONFIG_SHOW_HEADER_IN_PREVIEW_PATH);
     }
 
     public function getReplacements()

@@ -25,4 +25,15 @@ class MKleine_Mailpreview_Model_Placeholder extends Mage_Core_Model_Abstract
         parent::_construct();
         $this->_init('mk_mailpreview/placeholder');
     }
+
+    /**
+     * Loads a placeholder by a specific variable
+     * @param $varName Name of variable
+     * @return $this MKleine_Mailpreview_Model_Placeholder
+     */
+    public function loadPlaceholderByVariableName($varName)
+    {
+        $this->load($varName, 'variable');
+        return $this;
+    }
 }
