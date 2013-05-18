@@ -29,6 +29,14 @@
                                     </mailpreview>
                                 </children>
                             </email_template>
+                            <config>
+                                <children>
+                                    <mailpreview translate="title" module="mk_mailpreview">
+                                        <title>Mail preview settings</title>
+                                        <sort_order>50</sort_order>
+                                    </mailpreview>
+                                </children>
+                            </config>
                         </children>
                     </system>
                 </children>
