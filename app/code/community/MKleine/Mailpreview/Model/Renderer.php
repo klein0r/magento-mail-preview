@@ -42,7 +42,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
      * Never replaced variables
      * @var array
      */
-    protected $_blackListVars = array('logo_url', 'logo_alt', 'subscriber');
+    protected $_blackListVars = array('logo_url', 'logo_alt', 'subscriber', 'store');
 
     /**
      * @param $templateId Specific template id
@@ -146,6 +146,9 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
             }
         }
 
+        // Add the store
+        $vars['store'] = Mage::app()->getStore($this->getTemplate()->getTemplateFilter()->getStoreId());
+
         return $vars;
     }
 
@@ -187,7 +190,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         /** @var $filter MKleine_Mailpreview_Model_Email_Template_Filter */
         $filter = $template->getTemplateFilter();
 
-        return $filter->getCurrentReplacements($template->getTemplateText());
+        return $filter->getPlaceholderList($template->getTemplateText());
     }
 
 }
