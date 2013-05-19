@@ -39,7 +39,7 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
      * @param $text
      * @return array
      */
-    public function getCurrentReplacements($text)
+    public function getPlaceholderList($text)
     {
         $vars = array();
 
@@ -64,6 +64,10 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
                 } catch (Exception $e) {
                     Mage::log($e);
                 }
+
+                /*$tokenizer = new Varien_Filter_Template_Tokenizer_Variable();
+                $tokenizer->setString(trim($variableName));
+                $stackVars = $tokenizer->tokenize();*/
 
                 if (in_array($directiveType, array('var'))) {
                     $vars[trim($variableName)] = array(
@@ -109,5 +113,26 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
         }
 
         return $vars;
+    }
+
+    /**
+     * Returns a list of directives by using reflection
+     * @return array
+     */
+    protected function getDirectiveList()
+    {
+        $directiveList = array();
+
+        $class = Zend_Server_Reflection::reflectClass(__CLASS__);
+        /** @var $method Zend_Server_Reflection_Method */
+        foreach ($class->getMethods() as $method) {
+            if (strrpos($method->getName(), 'Directive')) {
+                $directiveList[] = $method->getName();
+            }
+        }
+
+        sort($directiveList);
+
+        return $directiveList;
     }
 }
