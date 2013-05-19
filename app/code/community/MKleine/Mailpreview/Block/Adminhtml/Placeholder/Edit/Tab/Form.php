@@ -62,13 +62,13 @@ class MKleine_Mailpreview_Block_Adminhtml_Placeholder_Edit_Tab_Form
 
         $fieldset->addField('variable', 'text', array(
             'label' => $this->__('Variable'),
-            'required' => false,
+            'required' => true,
             'name' => 'variable',
         ));
 
         $fieldset->addField('replacement', 'text', array(
             'label' => $this->__('Replacement'),
-            'required' => false,
+            'required' => true,
             'name' => 'replacement',
         ));
 
@@ -81,4 +81,6 @@ class MKleine_Mailpreview_Block_Adminhtml_Placeholder_Edit_Tab_Form
 
         return parent::_prepareForm();
     }
+
+
 }

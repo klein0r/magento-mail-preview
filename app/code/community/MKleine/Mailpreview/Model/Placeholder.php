@@ -36,4 +36,21 @@ class MKleine_Mailpreview_Model_Placeholder extends Mage_Core_Model_Abstract
         $this->load($varName, 'variable');
         return $this;
     }
+
+    /**
+     * Validates the current object
+     * @return array
+     */
+    public function validate()
+    {
+        $errors = array();
+        $helper = Mage::helper('mk_mailpreview');
+        if (!Zend_Validate::is($this->getVariable(), 'NotEmpty')) {
+            $errors[] = $helper->__('Please enter the variable name.');
+        }
+        if (!Zend_Validate::is($this->getReplacement(), 'NotEmpty')) {
+            $errors[] = $helper->__('Please enter the replacement.');
+        }
+        return $errors;
+    }
 }
