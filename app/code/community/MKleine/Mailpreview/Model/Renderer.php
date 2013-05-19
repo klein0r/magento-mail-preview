@@ -42,7 +42,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
      * Never replaced variables
      * @var array
      */
-    protected $_blackListVars = array('logo_url', 'logo_alt', 'subscriber', 'store');
+    protected $_blackListVars = array('logo_url', 'logo_alt', 'store');
 
     /**
      * @param $templateId Specific template id
