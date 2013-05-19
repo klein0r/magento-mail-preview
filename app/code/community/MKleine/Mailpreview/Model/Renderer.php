@@ -27,6 +27,18 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
     protected $_templateModel = null;
 
     /**
+     * List of replacement objects
+     * @var array
+     */
+    protected $_replacementObjects = array();
+
+    /**
+     * List of replacements for specific vars
+     * @var array
+     */
+    protected $_replacementCache = array();
+
+    /**
      * Never replaced variables
      * @var array
      */
@@ -112,17 +124,60 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
         foreach ($this->getCurrentReplacements() as $var => $rep)
         {
+            // Do not add blacklist entries
             if (!in_array($var, $this->_blackListVars)) {
-                $vars[$var] = 'test';
+
+                $replacement = $this->getReplacementFor($var);
+
+                if (strrpos($var, ".")) {
+                    list($objName, $subVar) = explode('.', $var);
+                    $obj = $this->getReplacerObject($objName);
+                    $obj->setData($subVar, $replacement);
+
+                    // Add the object one time
+                    if (!isset($vars[$objName])) {
+                        $vars[$objName] = $obj;
+                    }
+                }
+                else {
+                    // Normal variable
+                    $vars[$var] = $replacement;
+                }
             }
         }
 
-        $user = new stdClass();
-        $user->name = 'adsf';
-
-        $vars['user'] = 'afff adfs asd';
-
         return $vars;
+    }
+
+    /**
+     * Returns an object of a list of Varien_Object
+     * @param $name
+     * @return Varien_Object
+     */
+    protected function getReplacerObject($name)
+    {
+        if (!isset($this->_replacementObjects[$name])) {
+            $this->_replacementObjects[$name] = new Varien_Object();
+        }
+        return $this->_replacementObjects[$name];
+    }
+
+    /**
+     * Return the replacement for the specified variable
+     * @param $var
+     * @return string
+     */
+    protected function getReplacementFor($var)
+    {
+        if (!isset($this->_replacementCache[$var])) {
+            /** @var $phModel MKleine_Mailpreview_Model_Placeholder */
+            $phModel = Mage::getModel('mk_mailpreview/placeholder');
+            $phModel->loadPlaceholderByVariableName($var);
+
+            $this->_replacementCache[$var] = $phModel->getReplacement();
+        }
+
+        return $this->_replacementCache[$var];
     }
 
     public function getCurrentReplacements()
@@ -132,7 +187,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         /** @var $filter MKleine_Mailpreview_Model_Email_Template_Filter */
         $filter = $template->getTemplateFilter();
 
-        return $filter->getCurrentReplacements($template->getPreparedTemplateText());
+        return $filter->getCurrentReplacements($template->getTemplateText());
     }
 
 }
