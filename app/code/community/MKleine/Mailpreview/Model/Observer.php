@@ -29,20 +29,24 @@ class MKleine_Mailpreview_Model_Observer extends Mage_Core_Model_Abstract
 
     public function found_mail_preview_vars($observer)
     {
+        /** @var $helper MKleine_Mailpreview_Helper_Data */
+        $helper = Mage::helper('mk_mailpreview');
+
         $sender = $observer->getSender();
         $vars = $observer->getVars();
 
         if ($this->getAutoSaveToDatabase() && is_array($vars)) {
             foreach ($vars as $var) {
+                if (!$helper->isBlacklistVar($var)) {
+                    /** @var $model MKleine_Mailpreview_Model_Placeholder */
+                    $model = Mage::getModel('mk_mailpreview/placeholder');
+                    $model->loadPlaceholderByVariableName($var);
 
-                /** @var $model MKleine_Mailpreview_Model_Placeholder */
-                $model = Mage::getModel('mk_mailpreview/placeholder');
-                $model->loadPlaceholderByVariableName($var);
-
-                if (!$model->getId()) {
-                    $model->setVariable($var);
-                    $model->setReplacement('default');
-                    $model->save();
+                    if (!$model->getId()) {
+                        $model->setVariable($var);
+                        $model->setReplacement('default');
+                        $model->save();
+                    }
                 }
             }
         }

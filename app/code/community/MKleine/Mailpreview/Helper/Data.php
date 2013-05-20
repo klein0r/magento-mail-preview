@@ -20,5 +20,8 @@
  */
 class MKleine_Mailpreview_Helper_Data extends Mage_Core_Helper_Abstract
 {
-
+    public function isBlacklistVar($name)
+    {
+        return in_array($name, array('logo_url', 'logo_alt', 'store', 'user', 'order'));
+    }
 }

@@ -39,12 +39,6 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
     protected $_replacementCache = array();
 
     /**
-     * Never replaced variables
-     * @var array
-     */
-    protected $_blackListVars = array('logo_url', 'logo_alt', 'store', 'user');
-
-    /**
      * @param $templateId Specific template id
      */
     protected function initWithId($templateId)
@@ -133,14 +127,14 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
     public function getTemplateVars()
     {
+        /** @var $helper MKleine_Mailpreview_Helper_Data */
+        $helper = Mage::helper('mk_mailpreview');
         $vars = array();
 
         foreach ($this->getTemplatePlaceholderList() as $var)
         {
             // Do not add blacklist entries
-            if (!in_array($var, $this->_blackListVars)) {
-
-                $replacement = $this->getReplacementFor($var);
+            if (!$helper->isBlacklistVar($var) && $replacement = $this->getReplacementFor($var)) {
 
                 if (strrpos($var, ".")) {
                     list($objName, $subVar) = explode('.', $var);
@@ -165,6 +159,19 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         // Add the current user
         $vars['user'] = Mage::getSingleton('admin/session')->getUser();
 
+        // Add the last order
+        /** @var $orderModel Mage_Sales_Model_Order */
+        $orderModel = Mage::getModel('sales/order');
+
+        $orders = $orderModel->getCollection()
+            ->setOrder('increment_id', 'DESC')
+            ->setPageSize(1)
+            ->setCurPage(1);
+        $orderId = $orders->getFirstItem()->getEntityId();
+
+        $vars['order'] = $orderModel->load($orderId);
+        $vars['customer'] = Mage::getModel('customer/customer')->load($orderModel->getCustomerId());
+
         return $vars;
     }
 
@@ -173,13 +180,17 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
      */
     public function getTemplateVarsFlat()
     {
+        /** @var $helper MKleine_Mailpreview_Helper_Data */
+        $helper = Mage::helper('mk_mailpreview');
         $vars = array();
 
         foreach ($this->getTemplatePlaceholderList() as $var)
         {
             // Do not add blacklist entries
-            if (!in_array($var, $this->_blackListVars)) {
-                $vars[$var] = $this->getReplacementFor($var);
+            if (!$helper->isBlacklistVar($var)) {
+                if ($replacement = $this->getReplacementFor($var)) {
+                    $vars[$var] = $replacement;
+                }
             }
         }
 
