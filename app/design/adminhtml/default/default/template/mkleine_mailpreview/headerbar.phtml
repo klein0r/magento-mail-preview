@@ -1,9 +1,13 @@
 <?php
 /** @var $this MKleine_Mailpreview_Block_Adminhtml_Headerbar */
+
+$helper = Mage::helper('mk_mailpreview');
 ?>
 
 <?php if ($this->showHeader()) : ?>
 <div class="header">
+
+    <h1><?php echo $helper->__('Subject'); ?>: <?php echo $this->getSubject(); ?></h1>
 
     <ul>
     <?php foreach($this->getReplacements() as $var => $value) : ?>

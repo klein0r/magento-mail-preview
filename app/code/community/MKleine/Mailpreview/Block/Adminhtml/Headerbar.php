@@ -31,9 +31,22 @@ class MKleine_Mailpreview_Block_Adminhtml_Headerbar extends Mage_Adminhtml_Block
         return Mage::getStoreConfig(self::CONFIG_SHOW_HEADER_IN_PREVIEW_PATH);
     }
 
+    /**
+     * Returns a list of replacements in the current template
+     * @return array
+     */
     public function getReplacements()
     {
-        return $this->getRenderer()->getTemplateVars();
+        return $this->getRenderer()->getTemplateVarsFlat();
+    }
+
+    /**
+     * Returns the subject of the current template
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->getRenderer()->getProcessedTemplateSubject();
     }
 
     /**

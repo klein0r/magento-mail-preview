@@ -33,7 +33,7 @@ class MKleine_Mailpreview_Model_Observer extends Mage_Core_Model_Abstract
         $vars = $observer->getVars();
 
         if ($this->getAutoSaveToDatabase() && is_array($vars)) {
-            foreach ($vars as $var => $data) {
+            foreach ($vars as $var) {
 
                 /** @var $model MKleine_Mailpreview_Model_Placeholder */
                 $model = Mage::getModel('mk_mailpreview/placeholder');

@@ -42,7 +42,7 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
      * Never replaced variables
      * @var array
      */
-    protected $_blackListVars = array('logo_url', 'logo_alt', 'store');
+    protected $_blackListVars = array('logo_url', 'logo_alt', 'store', 'user');
 
     /**
      * @param $templateId Specific template id
@@ -107,6 +107,10 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         return Mage::app()->getRequest()->getParam($param);
     }
 
+    /**
+     * Returns the processed template string
+     * @return string
+     */
     public function getProcessedTemplate()
     {
         Varien_Profiler::start("email_template_proccessing");
@@ -118,11 +122,20 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         return $processedTemplate;
     }
 
+    /**
+     * Returns the processed subject string
+     * @return string
+     */
+    public function getProcessedTemplateSubject()
+    {
+        return $this->getTemplate()->getProcessedTemplateSubject($this->getTemplateVars());
+    }
+
     public function getTemplateVars()
     {
         $vars = array();
 
-        foreach ($this->getCurrentReplacements() as $var => $rep)
+        foreach ($this->getTemplatePlaceholderList() as $var)
         {
             // Do not add blacklist entries
             if (!in_array($var, $this->_blackListVars)) {
@@ -148,6 +161,27 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
 
         // Add the store
         $vars['store'] = Mage::app()->getStore($this->getTemplate()->getTemplateFilter()->getStoreId());
+
+        // Add the current user
+        $vars['user'] = Mage::getSingleton('admin/session')->getUser();
+
+        return $vars;
+    }
+
+    /**
+     * Returns a list of template vars without creating subobjects
+     */
+    public function getTemplateVarsFlat()
+    {
+        $vars = array();
+
+        foreach ($this->getTemplatePlaceholderList() as $var)
+        {
+            // Do not add blacklist entries
+            if (!in_array($var, $this->_blackListVars)) {
+                $vars[$var] = $this->getReplacementFor($var);
+            }
+        }
 
         return $vars;
     }
@@ -183,14 +217,17 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         return $this->_replacementCache[$var];
     }
 
-    public function getCurrentReplacements()
+    protected function getTemplatePlaceholderList()
     {
         $template = $this->getTemplate();
 
         /** @var $filter MKleine_Mailpreview_Model_Email_Template_Filter */
         $filter = $template->getTemplateFilter();
 
-        return $filter->getPlaceholderList($template->getTemplateText());
+        return array_merge(
+            $filter->getPlaceholderList($template->getTemplateText()),
+            $filter->getPlaceholderList($template->getTemplateSubject())
+        );
     }
 
 }

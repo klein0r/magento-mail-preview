@@ -52,42 +52,29 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
                 $directiveType = $construction[1];
                 $variableName = $construction[2];
 
-                $replacedValue = '';
                 $callback = array($this, $directiveType.'Directive');
 
                 if(!is_callable($callback)) {
                     continue;
                 }
 
-                try {
-                    $replacedValue = call_user_func($callback, $construction);
-                } catch (Exception $e) {
-                    Mage::log($e);
-                }
+                $tokenizer = new Varien_Filter_Template_Tokenizer_Variable();
+                $tokenizer->setString($variableName);
+                $params = $tokenizer->tokenize();
 
-                /*$tokenizer = new Varien_Filter_Template_Tokenizer_Variable();
-                $tokenizer->setString(trim($variableName));
-                $stackVars = $tokenizer->tokenize();*/
+                if (!$this->containsMethod($params)) {
 
-                if (in_array($directiveType, array('var'))) {
-                    $vars[trim($variableName)] = array(
-                        'type' => $directiveType,
-                        'replacement' => $replacedValue,
-                        'replaced' => ($replacedValue != $match)
-                    );
-                }
-                else if (in_array($directiveType, array('htmlescape'))) {
-                    $default = '{mk_no_replacement}';
-                    foreach($this->getVariableNamesOf($variableName, $default) as $var => $value) {
-                        $vars[trim($var)] = array(
-                            'type' => $directiveType,
-                            'replacement' => $value,
-                            'replaced' => ($value != $default)
-                        );
+                    if (in_array($directiveType, array('var'))) {
+                        $vars[] = trim($variableName);
                     }
+
+                    $vars = array_merge($vars, $this->getVariableNamesOf($variableName));
                 }
             }
         }
+
+        // Every variable just one time
+        $vars = array_unique($vars);
 
         // dispatch event with found vars
         Mage::dispatchEvent('mk_mailpreview_found_mail_preview_vars', array(
@@ -98,17 +85,32 @@ class MKleine_Mailpreview_Model_Email_Template_Filter extends Mage_Core_Model_Em
         return $vars;
     }
 
-    protected function getVariableNamesOf($value, $default = null)
+    /**
+     * Checks if the parameter contains a method
+     * @param $params
+     */
+    protected function containsMethod($params)
+    {
+        foreach ($params as $param) {
+            if ($param['type'] == 'method') {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    protected function getVariableNamesOf($value)
     {
         $vars = array();
 
         $tokenizer = new Varien_Filter_Template_Tokenizer_Parameter();
         $tokenizer->setString($value);
         $params = $tokenizer->tokenize();
+
         foreach ($params as $key => $value) {
             if (substr($value, 0, 1) === '$') {
-                $variable = substr($value, 1);
-                $vars[$variable] = $this->_getVariable(substr($value, 1), $default);
+                $vars[] = substr($value, 1);
             }
         }
 
