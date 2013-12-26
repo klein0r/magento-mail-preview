@@ -30,11 +30,17 @@ class MKleine_Mailpreview_Block_Adminhtml_Mailpreview extends Mage_Adminhtml_Blo
         /** @var $renderer MKleine_Mailpreview_Model_Renderer */
         $renderer = Mage::getSingleton('mk_mailpreview/renderer');
 
+        /** @var $appEmulation Mage_Core_Model_App_Emulation */
+        $appEmulation = Mage::getSingleton('core/app_emulation');
+        $initialEnvironmentInfo = $appEmulation->startEnvironmentEmulation( $renderer->getTestOrder()->getStoreId() );
+
         $templateProcessed = $renderer->getProcessedTemplate();
 
         if ($renderer->getTemplate()->isPlain()) {
             $templateProcessed = "<pre>" . htmlspecialchars($templateProcessed) . "</pre>";
         }
+
+        $appEmulation->stopEnvironmentEmulation($initialEnvironmentInfo);
 
         return $templateProcessed;
     }

@@ -160,17 +160,10 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
         $vars['user'] = Mage::getSingleton('admin/session')->getUser();
 
         // Add the last order
-        /** @var $orderModel Mage_Sales_Model_Order */
-        $orderModel = Mage::getModel('sales/order');
+        $testOrder = $this->getTestOrder();
 
-        $orders = $orderModel->getCollection()
-            ->setOrder('increment_id', 'DESC')
-            ->setPageSize(1)
-            ->setCurPage(1);
-        $orderId = $orders->getFirstItem()->getEntityId();
-
-        $vars['order'] = $orderModel->load($orderId);
-        $vars['customer'] = Mage::getModel('customer/customer')->load($orderModel->getCustomerId());
+        $vars['order'] = $testOrder;
+        $vars['customer'] = Mage::getModel('customer/customer')->load($testOrder->getCustomerId());
 
         return $vars;
     }
@@ -239,6 +232,20 @@ class MKleine_Mailpreview_Model_Renderer extends Mage_Core_Model_Abstract
             $filter->getPlaceholderList($template->getTemplateText()),
             $filter->getPlaceholderList($template->getTemplateSubject())
         );
+    }
+
+    public function getTestOrder()
+    {
+        /** @var $orderModel Mage_Sales_Model_Order */
+        $orderModel = Mage::getModel('sales/order');
+
+        $orders = $orderModel->getCollection()
+            ->setOrder('increment_id', 'DESC')
+            ->setPageSize(1)
+            ->setCurPage(1);
+        $orderId = $orders->getFirstItem()->getEntityId();
+
+        return $orderModel->load($orderId);
     }
 
 }

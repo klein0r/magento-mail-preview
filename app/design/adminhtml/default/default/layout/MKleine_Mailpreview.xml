@@ -7,12 +7,12 @@
         </reference>
     </mk_mailpreview_adminhtml_placeholder_index>
 
-    <mkleine_mailpreview>
+    <mk_mailpreview>
         <remove name="root"/>
         <block type="core/template" name="mkleine_mailpreview_root" output="toHtml" template="mkleine_mailpreview/preview.phtml">
             <block type="mk_mailpreview/adminhtml_headerbar" name="headerbar" as="headerbar" template="mkleine_mailpreview/headerbar.phtml"/>
             <block type="mk_mailpreview/adminhtml_mailpreview" name="content" as="content"/>
         </block>
-    </mkleine_mailpreview>
+    </mk_mailpreview>
 
 </layout>

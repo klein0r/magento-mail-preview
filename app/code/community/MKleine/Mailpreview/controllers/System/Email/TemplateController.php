@@ -25,7 +25,7 @@ class MKleine_Mailpreview_System_Email_TemplateController extends Mage_Adminhtml
 {
     public function previewAction()
     {
-        $this->loadLayout('mkleine_mailpreview');
+        $this->loadLayout('mk_mailpreview');
         $this->renderLayout();
     }
 }
