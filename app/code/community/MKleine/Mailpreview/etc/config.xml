@@ -61,24 +61,17 @@
             <adminhtml>
                 <args>
                     <modules>
-                        <MKleine_Mailpreview before="Mage_Adminhtml">MKleine_Mailpreview</MKleine_Mailpreview>
+                        <MKleine_Mailpreview before="Mage_Adminhtml">MKleine_Mailpreview_Adminhtml</MKleine_Mailpreview>
                     </modules>
                 </args>
             </adminhtml>
-            <mk_mailpreview>
-                <use>admin</use>
-                <args>
-                    <module>MKleine_Mailpreview</module>
-                    <frontName>mailpreview</frontName>
-                </args>
-            </mk_mailpreview>
         </routers>
     </admin>
     <adminhtml>
         <layout>
             <updates>
                 <mk_mailpreview>
-                    <file>MKleine_Mailpreview.xml</file>
+                    <file>mk_mailpreview.xml</file>
                 </mk_mailpreview>
             </updates>
         </layout>

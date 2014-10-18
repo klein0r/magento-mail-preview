@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
 <layout version="0.1.0">
 
-    <mk_mailpreview_adminhtml_placeholder_index>
+    <adminhtml_placeholder_index>
         <reference name="content">
             <block type="mk_mailpreview/adminhtml_placeholder" name="mkleine_mailpreview_adminhtml_placeholder"/>
         </reference>
-    </mk_mailpreview_adminhtml_placeholder_index>
+    </adminhtml_placeholder_index>
 
     <mk_mailpreview>
         <remove name="root"/>

@@ -1,7 +1,7 @@
-app/code/community/MKleine/Mailpreview app/code/community/MKleine/Mailpreview
-app/etc/modules/MKleine_Mailpreview.xml app/etc/modules/MKleine_Mailpreview.xml
-app/locale/de_DE/MKleine_Mailpreview.csv app/locale/de_DE/MKleine_Mailpreview.csv
-app/locale/en_US/MKleine_Mailpreview.csv app/locale/en_US/MKleine_Mailpreview.csv
-app/design/adminhtml/default/default/layout/MKleine_Mailpreview.xml app/design/adminhtml/default/default/layout/MKleine_Mailpreview.xml
-app/design/adminhtml/default/default/template/mkleine_mailpreview app/design/adminhtml/default/default/template/mkleine_mailpreview
-skin/adminhtml/default/default/mk-mailprev.css skin/adminhtml/default/default/mk-mailprev.css
+app/code/community/MKleine/* app/code/community/MKleine/
+app/etc/modules/ app/etc/modules/
+app/locale/de_DE/* app/locale/de_DE/
+app/locale/en_US/* app/locale/en_US/
+app/design/adminhtml/default/default/layout/* app/design/adminhtml/default/default/layout/
+app/design/adminhtml/default/default/template/* app/design/adminhtml/default/default/template/
+skin/adminhtml/default/default/* skin/adminhtml/default/default/
